@@ -1,4 +1,4 @@
-import * as BABYLON from '@babylonjs/core';
+import * as BABYLON from "@babylonjs/core";
 
 export class BasicBabylon {
   private readonly engine: BABYLON.Engine;
@@ -10,12 +10,12 @@ export class BasicBabylon {
     this.scene = new BABYLON.Scene(this.engine);
 
     const camera = new BABYLON.ArcRotateCamera(
-      'camera',
+      "camera",
       -Math.PI / 3,
       Math.PI / 3,
       40,
       BABYLON.Vector3.Zero(),
-      this.scene,
+      this.scene
     );
 
     camera.attachControl();
@@ -29,10 +29,10 @@ export class BasicBabylon {
     camera.lowerRadiusLimit = 1;
     /** Максимальное отдаление */
     camera.upperRadiusLimit = 40;
-    /** Отключение перемещение объектов по ПКМ */
+    /** Отключение перемещение объектов по ПКМ (при setTarget ПКМ отключён)*/
     // camera.panningSensibility = 0;
     /** Возможность установить target */
-    // camera.useFramingBehavior = true;
+    camera.useFramingBehavior = true;
     // /** Убрать восстановление камеры по оси Y */
     // camera.framingBehavior ? (camera.framingBehavior.elevationReturnTime = -1) : undefined;
 

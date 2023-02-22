@@ -75,6 +75,7 @@ export class CreateMeshes {
     );
 
     sphere.position.set(0, 0, 0);
+    this.camera.setTarget(sphere);
     sphere.rotate(new BABYLON.Vector3(0, 1, 0), 1);
 
     // const plane = BABYLON.MeshBuilder.CreatePlane(
