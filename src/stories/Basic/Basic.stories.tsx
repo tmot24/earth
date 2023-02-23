@@ -3,11 +3,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { Basic } from "./Basic";
 
 export const Template: ComponentStory<typeof Basic> = () => {
-  return (
-    <div style={{ width: "100%", height: "100%" }}>
-      <Basic />
-    </div>
-  );
+  return <Basic />;
 };
 
 export default {
