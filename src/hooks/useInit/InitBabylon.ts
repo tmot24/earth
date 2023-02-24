@@ -42,8 +42,6 @@ export class InitBabylon {
 
     this.camera = camera;
 
-    new BABYLON.AxesViewer();
-
     // const light = new BABYLON.HemisphericLight('HemiLight', new BABYLON.Vector3(0, 0, -1), this.scene);
 
     this.engine.runRenderLoop(() => {

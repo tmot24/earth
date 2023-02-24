@@ -11,6 +11,7 @@ export default {
   component: Template,
   args: {
     isDebug: false,
+    isAxes: false,
   },
   parameters: {
     layout: "fullscreen",

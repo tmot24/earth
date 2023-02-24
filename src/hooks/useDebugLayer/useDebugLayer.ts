@@ -1,22 +1,31 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useContext } from "../../context";
 import { ITemplate } from "../../stories/Template/Template";
+import { DebugLayer, DebugLayerTab } from "@babylonjs/core";
 
 /** Добавление дебага */
 export const useDebugLayer = () => {
   const {
     context: { isDebug, scene },
   } = useContext<ITemplate>();
+  const debugLayer = useRef<DebugLayer>();
 
   useEffect(() => {
     if (scene) {
       if (isDebug) {
-        scene?.debugLayer?.show({
+        debugLayer.current = scene?.debugLayer;
+        debugLayer.current.show({
           embedMode: true,
+          initialTab: DebugLayerTab.Statistics,
         });
       } else {
-        scene?.debugLayer?.hide();
+        debugLayer.current?.hide();
       }
     }
+
+    // Всё равно вылетает ошибка
+    return () => {
+      debugLayer.current?.hide();
+    };
   }, [isDebug, scene]);
 };
