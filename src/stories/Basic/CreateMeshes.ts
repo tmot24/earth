@@ -67,7 +67,7 @@ export class CreateMeshes {
 
   createRawSphere = () => {
     const sphere = BABYLON.MeshBuilder.CreateSphere(
-      "plane",
+      "sphere",
       {
         diameter: 3,
       },
@@ -107,7 +107,9 @@ export class CreateMeshes {
       true
     );
 
-    const material = new BABYLON.StandardMaterial("planeMaterial", this.scene);
+    texture.name = "FragmentTexture";
+
+    const material = new BABYLON.StandardMaterial("material", this.scene);
 
     material.emissiveTexture = texture;
 

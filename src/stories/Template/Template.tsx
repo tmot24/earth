@@ -1,19 +1,14 @@
-import { useEffect, useRef } from "react";
+import { TemplateImp } from "./TemplateImp";
+import { Provider } from "../../context";
 
-import { BasicBabylon } from "../BasicBabylon";
+export interface ITemplate {
+  isDebug?: boolean;
+}
 
-export const Template = () => {
-  const babylonCanvas = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = babylonCanvas.current;
-
-    if (canvas) {
-      const { scene, camera } = new BasicBabylon(canvas);
-    }
-  }, []);
-
+export const Template = (props: ITemplate) => {
   return (
-    <canvas style={{ width: "100%", height: "100%" }} ref={babylonCanvas} />
+    <Provider props={props}>
+      <TemplateImp />
+    </Provider>
   );
 };

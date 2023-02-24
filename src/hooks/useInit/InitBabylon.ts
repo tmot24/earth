@@ -1,6 +1,8 @@
 import * as BABYLON from "@babylonjs/core";
+import "@babylonjs/core/Debug/debugLayer";
+import "@babylonjs/inspector";
 
-export class BasicBabylon {
+export class InitBabylon {
   private readonly engine: BABYLON.Engine;
   readonly scene: BABYLON.Scene;
   readonly camera: BABYLON.ArcRotateCamera;
@@ -9,9 +11,7 @@ export class BasicBabylon {
     this.engine = new BABYLON.Engine(canvas);
     this.scene = new BABYLON.Scene(this.engine);
 
-    /** Если установлено значение true, увеличение и уменьшение масштаба в браузере будет корректно изменять аппаратное масштабирование
-     * (для дисплеев с высоким разрешением)(может снизить fps) */
-    this.engine.adaptToDeviceRatio = true;
+    this.scene.clearColor = new BABYLON.Color4(0, 0.2, 0.4);
 
     const camera = new BABYLON.ArcRotateCamera(
       "camera",
@@ -49,7 +49,6 @@ export class BasicBabylon {
     this.engine.runRenderLoop(() => {
       this.engine.resize();
       this.scene.render();
-      // console.log(this.engine.getFps());
     });
   }
 }
