@@ -21,13 +21,14 @@ export class CreateSphere {
       "sphere",
       {
         diameter: 3,
+        sideOrientation: BABYLON.Mesh.DOUBLESIDE,
       },
       this.scene
     );
 
     this.sphereMesh.position.set(0, 0, 0);
     this.camera.setTarget(this.sphereMesh);
-    this.sphereMesh.rotate(new BABYLON.Vector3(0, 1, 0), 1);
+    // this.sphereMesh.rotate(new BABYLON.Vector3(0, 1, 0), 1);
 
     const pixels = new Uint8Array([255, 0, 0, 0, 255, 0, 0, 0, 255, 0, 0, 0]);
 
