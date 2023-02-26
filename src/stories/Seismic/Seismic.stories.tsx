@@ -7,7 +7,7 @@ export const SeismicStory: ComponentStory<typeof Seismic> = (props) => {
 };
 
 export default {
-  title: "Seismic/Seismic",
+  title: "SeismicStory",
   component: Seismic,
   args: {
     isDebug: false,

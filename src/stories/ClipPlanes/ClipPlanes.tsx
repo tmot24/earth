@@ -4,7 +4,7 @@ import { Provider } from "../../context";
 export interface IClipPlanes {
   clipHorizontal: number;
   clipVertical: number;
-  isDebug: boolean;
+  isDebug?: boolean;
 }
 
 export const ClipPlanes = (props: IClipPlanes) => {

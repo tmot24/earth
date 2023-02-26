@@ -7,7 +7,7 @@ export const TemplateStory: ComponentStory<typeof Template> = (props) => {
 };
 
 export default {
-  title: "Template/Template",
+  title: "TemplateStory",
   component: Template,
   args: {
     isDebug: false,

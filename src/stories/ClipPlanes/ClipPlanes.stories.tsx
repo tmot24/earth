@@ -7,7 +7,7 @@ export const ClipPlanesStory: ComponentStory<typeof ClipPlanes> = (props) => {
 };
 
 export default {
-  title: "ClipPlanes/ClipPlanes",
+  title: "ClipPlanesStory",
   component: ClipPlanes,
   args: {
     isDebug: false,
