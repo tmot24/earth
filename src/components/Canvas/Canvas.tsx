@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useContext } from "../../context";
+import styles from "./Canvas.module.css";
 
 export const Canvas = () => {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -14,10 +15,5 @@ export const Canvas = () => {
     }
   }, []);
 
-  return (
-    <canvas
-      style={{ width: "100%", height: "100%", outline: "none" }}
-      ref={ref}
-    />
-  );
+  return <canvas className={styles.canvas} ref={ref} />;
 };

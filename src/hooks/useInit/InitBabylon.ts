@@ -13,7 +13,7 @@ export class InitBabylon {
 
     this.scene.clearColor = new BABYLON.Color4(0, 0.2, 0.4);
 
-    const camera = new BABYLON.ArcRotateCamera(
+    this.camera = new BABYLON.ArcRotateCamera(
       "camera",
       -Math.PI / 3,
       Math.PI / 3,
@@ -22,25 +22,25 @@ export class InitBabylon {
       this.scene
     );
 
-    camera.attachControl();
+    this.camera.attachControl();
     /** Увеличение по курсору */
-    camera.zoomToMouseLocation = true;
+    this.camera.zoomToMouseLocation = true;
     /** Скорость прокрутки */
-    camera.wheelPrecision = 50;
+    this.camera.wheelPrecision = 50;
     /** Обрезание фигур при приближении */
-    camera.minZ = 0;
+    this.camera.minZ = 0;
     /** Минимальное приближение */
-    camera.lowerRadiusLimit = 1;
+    this.camera.lowerRadiusLimit = 1;
     /** Максимальное отдаление */
-    camera.upperRadiusLimit = 40;
+    this.camera.upperRadiusLimit = 40;
     /** Отключение перемещение объектов по ПКМ (при setTarget ПКМ отключён)*/
-    // camera.panningSensibility = 0;
-    /** Возможность установить target */
-    camera.useFramingBehavior = true;
+    // this.camera.panningSensibility = 0;
+    /** Поведение камеры */
+    this.camera.useFramingBehavior = true;
     // /** Убрать восстановление камеры по оси Y */
-    // camera.framingBehavior ? (camera.framingBehavior.elevationReturnTime = -1) : undefined;
-
-    this.camera = camera;
+    // this.camera.framingBehavior
+    //   ? (this.camera.framingBehavior.elevationReturnTime = -1)
+    //   : undefined;
 
     // const light = new BABYLON.HemisphericLight('HemiLight', new BABYLON.Vector3(0, 0, -1), this.scene);
 

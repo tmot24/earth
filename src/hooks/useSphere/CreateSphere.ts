@@ -47,7 +47,6 @@ export class CreateSphere {
     );
 
     const material = new BABYLON.StandardMaterial("planeMaterial", this.scene);
-    material.backFaceCulling = true;
 
     material.emissiveTexture = texture;
 
