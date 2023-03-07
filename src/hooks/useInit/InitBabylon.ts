@@ -1,9 +1,11 @@
 import * as BABYLON from "@babylonjs/core";
+import * as GUI from "@babylonjs/gui";
 import "@babylonjs/core/Debug/debugLayer";
 import "@babylonjs/inspector";
 
 export class InitBabylon {
-  private readonly engine: BABYLON.Engine;
+  private textBlock: GUI.TextBlock;
+  readonly engine: BABYLON.Engine;
   readonly scene: BABYLON.Scene;
   readonly camera: BABYLON.ArcRotateCamera;
 
@@ -44,9 +46,32 @@ export class InitBabylon {
 
     // const light = new BABYLON.HemisphericLight('HemiLight', new BABYLON.Vector3(0, 0, -1), this.scene);
 
+    const advancedTexture = GUI.AdvancedDynamicTexture.CreateFullscreenUI(
+      "UI",
+      true,
+      this.scene
+    );
+
+    this.textBlock = new GUI.TextBlock(
+      "textBlock",
+      `FPS: ${this.engine.getFps().toFixed(0)}`
+    );
+
+    console.log(this.textBlock);
+
+    this.textBlock.color = "white";
+    this.textBlock.fontSize = 14;
+    this.textBlock.width = "50px";
+    this.textBlock.height = "14px";
+    this.textBlock.horizontalAlignment = GUI.Control.HORIZONTAL_ALIGNMENT_LEFT;
+    this.textBlock.verticalAlignment = GUI.Control.VERTICAL_ALIGNMENT_TOP;
+
+    advancedTexture.addControl(this.textBlock);
+
     this.engine.runRenderLoop(() => {
       this.engine.resize();
       this.scene.render();
+      this.textBlock.text = `FPS: ${this.engine.getFps().toFixed(0)}`;
     });
   }
 }

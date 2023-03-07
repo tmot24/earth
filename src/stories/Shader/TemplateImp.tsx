@@ -5,15 +5,8 @@ import { useAxes } from "../../hooks/useAxes/useAxes";
 import { useEffect } from "react";
 import { useContext } from "../../context";
 import * as BABYLON from "@babylonjs/core";
-import vertex from "./glsl/vertex.glsl?raw";
+import vertex from "./glsl/vertex.vert?raw";
 import fragment from "./glsl/fragment.frag?raw";
-import earth from "./glsl/earth.svg";
-import amiga from "./glsl/amiga.jpg";
-
-console.log("vertex", vertex);
-console.log("typeof vertex", typeof vertex);
-console.log("fragment", fragment);
-console.log("typeof fragment", typeof fragment);
 
 export const TemplateImp = () => {
   const {
@@ -25,12 +18,7 @@ export const TemplateImp = () => {
   useDebugLayer();
 
   useEffect(() => {
-    console.log("vertex", vertex);
-    console.log("fragment", fragment);
     if (scene) {
-      // console.log("vertex", vertex);
-      // console.log("fragment", fragment);
-
       const shaderMaterial = new BABYLON.ShaderMaterial(
         "shader",
         scene,
@@ -46,18 +34,19 @@ export const TemplateImp = () => {
             "worldViewProjection",
             "view",
             "projection",
+            "time",
+            "direction",
           ],
+          samplers: ["textureSampler"],
+          defines: ["MyDefine"],
+          needAlphaBlending: true,
+          needAlphaTesting: true,
         }
       );
 
-      const mainTexture = new BABYLON.Texture(amiga, scene);
-
-      shaderMaterial.setTexture("textureSampler", mainTexture);
-
-      shaderMaterial.backFaceCulling = false;
-
       const box = BABYLON.MeshBuilder.CreateBox("box", {}, scene);
       box.material = shaderMaterial;
+      camera?.setTarget(box);
     }
   });
 
