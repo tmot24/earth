@@ -19,7 +19,7 @@ export class InitBabylon {
       "camera",
       -Math.PI / 3,
       Math.PI / 3,
-      40,
+      20,
       BABYLON.Vector3.Zero(),
       this.scene
     );

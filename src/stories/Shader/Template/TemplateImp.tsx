@@ -1,9 +1,9 @@
-import { Canvas } from "../../components/Canvas/Canvas";
-import { useDebugLayer } from "../../hooks/useDebugLayer/useDebugLayer";
-import { useInit } from "../../hooks/useInit/useInit";
-import { useAxes } from "../../hooks/useAxes/useAxes";
+import { Canvas } from "../../../components/Canvas/Canvas";
+import { useDebugLayer } from "../../../hooks/useDebugLayer/useDebugLayer";
+import { useInit } from "../../../hooks/useInit/useInit";
+import { useAxes } from "../../../hooks/useAxes/useAxes";
 import { useEffect } from "react";
-import { useContext } from "../../context";
+import { useContext } from "../../../context";
 import * as BABYLON from "@babylonjs/core";
 import vertex from "./glsl/vertex.vert?raw";
 import fragment from "./glsl/fragment.frag?raw";
