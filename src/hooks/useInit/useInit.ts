@@ -9,13 +9,20 @@ export const useInit = <T extends object>() => {
 
   useEffect(() => {
     if (canvas) {
-      const { scene, camera } = new InitBabylon(canvas);
+      const { scene, camera, engine } = new InitBabylon(canvas);
 
       setContext((prevState) => ({
         ...prevState,
+        engine,
         scene,
         camera,
       }));
     }
+
+    return () => {
+      context.engine?.dispose();
+      context.scene?.dispose();
+      context.camera?.dispose();
+    };
   }, [canvas]);
 };

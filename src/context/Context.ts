@@ -5,6 +5,7 @@ export type TBabylon = {
   canvas: HTMLCanvasElement | null;
   scene?: BABYLON.Scene;
   camera?: BABYLON.ArcRotateCamera;
+  engine?: BABYLON.Engine;
 };
 
 export type TContext<T extends object> = T & TBabylon;

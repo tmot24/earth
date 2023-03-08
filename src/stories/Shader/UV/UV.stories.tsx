@@ -10,7 +10,6 @@ export default {
   title: "Shader/UVStory",
   component: UV,
   args: {
-    scale: 1,
     startColor: 0,
     endColor: 1,
     isDebug: false,

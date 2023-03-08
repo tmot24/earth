@@ -1,14 +1,12 @@
 import { Consumer } from "./Consumer";
 import { Provider } from "../../../context";
 
-export interface IUV {
+export interface IWave {
   isDebug?: boolean;
   isAxes?: boolean;
-  startColor: number;
-  endColor: number;
 }
 
-export const UV = (props: IUV) => {
+export const Wave = (props: IWave) => {
   return (
     <Provider props={props}>
       <Consumer />

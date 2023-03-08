@@ -46,10 +46,11 @@ export const Consumer = () => {
       );
 
       const box = BABYLON.MeshBuilder.CreateBox("box", {}, scene);
+
       box.material = shaderMaterial;
       camera?.setTarget(box);
     }
-  });
+  }, [scene]);
 
   return <Canvas />;
 };
