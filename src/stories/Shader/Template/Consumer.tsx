@@ -7,11 +7,12 @@ import { useContext } from "../../../context";
 import * as BABYLON from "@babylonjs/core";
 import vertex from "./glsl/vertex.vert?raw";
 import fragment from "./glsl/fragment.frag?raw";
+import { ITemplate } from "./Template";
 
-export const TemplateImp = () => {
+export const Consumer = () => {
   const {
     context: { scene, camera },
-  } = useContext();
+  } = useContext<ITemplate>();
 
   useInit();
   useAxes();

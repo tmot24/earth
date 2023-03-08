@@ -7,11 +7,12 @@ import { useContext } from "../../../context";
 import * as BABYLON from "@babylonjs/core";
 import vertex from "./glsl/vertex.vert?raw";
 import fragment from "./glsl/fragment.frag?raw";
+import { IUV } from "./UV";
 
-export const FirstImp = () => {
+export const UVImp = () => {
   const {
-    context: { scene, camera },
-  } = useContext();
+    context: { scene, camera, startColor, endColor },
+  } = useContext<IUV>();
 
   useInit();
   useAxes();
@@ -34,7 +35,6 @@ export const FirstImp = () => {
             "worldViewProjection",
             "view",
             "projection",
-            "time",
             "direction",
           ],
           samplers: ["textureSampler"],
@@ -44,7 +44,16 @@ export const FirstImp = () => {
         }
       );
 
-      const box = BABYLON.MeshBuilder.CreateBox("box", {}, scene);
+      shaderMaterial.setFloat("startColor", startColor);
+      shaderMaterial.setFloat("endColor", endColor);
+
+      const box = BABYLON.MeshBuilder.CreatePlane(
+        "box",
+        {
+          size: 2,
+        },
+        scene
+      );
       box.material = shaderMaterial;
       camera?.setTarget(box);
     }

@@ -40,9 +40,9 @@ export class InitBabylon {
     /** Поведение камеры */
     this.camera.useFramingBehavior = true;
     // /** Убрать восстановление камеры по оси Y */
-    // this.camera.framingBehavior
-    //   ? (this.camera.framingBehavior.elevationReturnTime = -1)
-    //   : undefined;
+    this.camera.framingBehavior
+      ? (this.camera.framingBehavior.elevationReturnTime = -1)
+      : undefined;
 
     // const light = new BABYLON.HemisphericLight('HemiLight', new BABYLON.Vector3(0, 0, -1), this.scene);
 
@@ -56,8 +56,6 @@ export class InitBabylon {
       "textBlock",
       `FPS: ${this.engine.getFps().toFixed(0)}`
     );
-
-    console.log(this.textBlock);
 
     this.textBlock.color = "white";
     this.textBlock.fontSize = 14;

@@ -1,4 +1,4 @@
-import { TemplateImp } from "./TemplateImp";
+import { Consumer } from "./Consumer";
 import { Provider } from "../../../context";
 
 export interface ITemplate {
@@ -9,7 +9,7 @@ export interface ITemplate {
 export const Template = (props: ITemplate) => {
   return (
     <Provider props={props}>
-      <TemplateImp />
+      <Consumer />
     </Provider>
   );
 };

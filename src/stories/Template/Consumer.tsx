@@ -4,7 +4,7 @@ import { useInit } from "../../hooks/useInit/useInit";
 import { useSphere } from "../../hooks/useSphere/useSphere";
 import { useAxes } from "../../hooks/useAxes/useAxes";
 
-export const TemplateImp = () => {
+export const Consumer = () => {
   useInit();
   useAxes();
   useDebugLayer();
