@@ -2,7 +2,7 @@ import { Canvas } from "../../../components/Canvas/Canvas";
 import { useDebugLayer } from "../../../hooks/useDebugLayer/useDebugLayer";
 import { useInit } from "../../../hooks/useInit/useInit";
 import { useAxes } from "../../../hooks/useAxes/useAxes";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useContext } from "../../../context";
 import * as BABYLON from "@babylonjs/core";
 import vertex from "./glsl/vertex.vert?raw";
@@ -13,7 +13,6 @@ export const Consumer = () => {
   const {
     context: { scene, camera },
   } = useContext<IWave>();
-  const meshes = useRef<BABYLON.Mesh[]>([]);
 
   useInit();
   useAxes();
@@ -63,7 +62,6 @@ export const Consumer = () => {
         },
         scene
       );
-      meshes.current.push(cylinder);
 
       // https://doc.babylonjs.com/features/featuresDeepDive/materials/using/blendModes
       shaderMaterial.alphaMode = BABYLON.Engine.ALPHA_ONEONE;
@@ -77,7 +75,6 @@ export const Consumer = () => {
         },
         scene
       );
-      meshes.current.push(sphere);
 
       sphere.position.set(0, 0, 0);
 
@@ -89,11 +86,7 @@ export const Consumer = () => {
 
       camera?.setTarget(cylinder);
     }
-
-    return () => {
-      meshes.current.forEach((obj) => obj.dispose(false, true));
-    };
-  });
+  }, [scene]);
 
   return <Canvas />;
 };

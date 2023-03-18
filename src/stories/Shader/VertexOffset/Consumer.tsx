@@ -7,12 +7,12 @@ import { useContext } from "../../../context";
 import * as BABYLON from "@babylonjs/core";
 import vertex from "./glsl/vertex.vert?raw";
 import fragment from "./glsl/fragment.frag?raw";
-import { ITemplate } from "./Template";
+import { IVertexOffset } from "./VertexOffset";
 
 export const Consumer = () => {
   const {
     context: { scene, camera },
-  } = useContext<ITemplate>();
+  } = useContext<IVertexOffset>();
 
   useInit();
   useAxes();
@@ -35,7 +35,6 @@ export const Consumer = () => {
             "worldViewProjection",
             "view",
             "projection",
-            "time",
             "direction",
           ],
           samplers: ["textureSampler"],
@@ -44,21 +43,30 @@ export const Consumer = () => {
           needAlphaTesting: true,
         }
       );
+      shaderMaterial.sideOrientation = BABYLON.Mesh.DOUBLESIDE;
 
-      const plane = BABYLON.MeshBuilder.CreatePlane(
-        "plane",
-        {
-          sideOrientation: BABYLON.Mesh.DOUBLESIDE,
-        },
-        scene
-      );
-      plane.increaseVertices(10);
-      plane.rotate(new BABYLON.Vector3(1, 0, 0), Math.PI / 2);
+      shaderMaterial.setFloat("PI", Math.PI);
 
-      plane.material = shaderMaterial;
-      camera?.setTarget(plane);
+      let time = 0;
+
+      scene.registerBeforeRender(() => {
+        shaderMaterial.setFloat("time", time);
+        time += 0.002;
+      });
+
+      const ground = BABYLON.CreateGround("ground", {
+        subdivisions: 100,
+        height: 10,
+        width: 10,
+      });
+
+      ground.material = shaderMaterial;
+
+      camera?.setTarget(ground);
     }
   }, [scene]);
+
+  useEffect(() => {}, []);
 
   return <Canvas />;
 };

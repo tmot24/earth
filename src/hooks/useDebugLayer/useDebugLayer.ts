@@ -8,6 +8,7 @@ export const useDebugLayer = () => {
   const {
     context: { isDebug, scene },
   } = useContext<ITemplate>();
+
   const debugLayer = useRef<DebugLayer>();
 
   useEffect(() => {
