@@ -7,12 +7,15 @@ import { useContext } from "../../../context";
 import * as BABYLON from "@babylonjs/core";
 import vertex from "./glsl/vertex.vert?raw";
 import fragment from "./glsl/fragment.frag?raw";
-import { ITemplate } from "./Template";
+import { ITexture } from "./Texture";
+import grass from "../../../images/grass.jpeg";
+import sand from "../../../images/sand.jpeg";
+import ussr from "../../../images/ussr.jpeg";
 
 export const Consumer = () => {
   const {
     context: { scene, camera },
-  } = useContext<ITemplate>();
+  } = useContext<ITexture>();
 
   useInit();
   useAxes();
@@ -38,7 +41,7 @@ export const Consumer = () => {
             "time",
             "direction",
           ],
-          samplers: ["textureSampler"],
+          samplers: ["textureGrass", "textureSand", "textureUssr"],
           defines: ["MyDefine"],
           needAlphaBlending: true,
           needAlphaTesting: true,
@@ -54,6 +57,13 @@ export const Consumer = () => {
         },
         scene
       );
+
+      const textureGrass = new BABYLON.Texture(grass, scene);
+      shaderMaterial.setTexture("textureGrass", textureGrass);
+      const textureSand = new BABYLON.Texture(sand, scene);
+      shaderMaterial.setTexture("textureSand", textureSand);
+      const textureUssr = new BABYLON.Texture(ussr, scene);
+      shaderMaterial.setTexture("textureUssr", textureUssr);
 
       ground.material = shaderMaterial;
       camera?.setTarget(ground);
