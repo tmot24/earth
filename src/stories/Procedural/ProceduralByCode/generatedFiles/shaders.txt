@@ -1,0 +1,110 @@
+// Vertex shader
+precision highp float;
+
+//Attributes
+attribute vec3 position;
+
+
+//Uniforms
+uniform float u_inputBlock;
+uniform float u_inputBlock1;
+uniform float u_inputBlock2;
+uniform mat4 u_world;
+uniform mat4 u_viewProjection;
+
+
+//Varyings
+varying float v_output2;
+
+
+
+
+//Entry point
+void main(void) {
+
+//vectorSplitter
+float x = position.x;
+float z = position.z;
+
+//multiplyBlock
+float output5 = x * u_inputBlock;
+
+//trigBlock1
+float output4 = cos(output5);
+
+//multiplyBlock
+float output7 = x * u_inputBlock1;
+
+//trigBlock2
+float output6 = cos(output7);
+
+//addNode0
+float output3 = output4 + output6;
+
+//multiplyBlock
+float output9 = x * u_inputBlock2;
+
+//trigBlock0
+float output8 = sin(output9);
+
+//additionalAddNode
+float output2 = output3 + output8;
+
+//vectorMerger
+vec3 xyz2 = vec3(x, output2, z).xyz;
+
+//worldPos
+vec4 output1 = u_world * vec4(xyz2, 1.0);
+
+//worldPos * viewProjectionTransform
+vec4 output0 = u_viewProjection * output1;
+
+//vertexOutput
+gl_Position = output0;
+v_output2 = output2;
+
+}
+
+// Fragment shader
+precision highp float;
+
+//Uniforms
+uniform float u_inputBlock;
+uniform float u_inputBlock1;
+uniform float u_inputBlock2;
+uniform mat4 u_world;
+uniform mat4 u_viewProjection;
+
+
+//Varyings
+varying float v_output2;
+
+
+//fragmentOutput
+#include<helperFunctions>
+
+
+
+//Entry point
+void main(void) {
+
+//Remap
+float output11 = 0.0 + (v_output2 - -5.0) * (1.0 - 0.0) / (5.0 - -5.0);
+
+//Gradient
+vec3 gradientTempColor = vec3(0, 0, 0);
+float gradientTempPosition;
+gradientTempPosition = clamp((output11 - 0.0) / (1.0 -  0.0), 0.0, 1.0) * step(1.0, 1.0);
+gradientTempColor = mix(gradientTempColor, vec3(1, 1, 1), gradientTempPosition);
+vec3 output10 = gradientTempColor;
+
+//fragmentOutput
+gl_FragColor = vec4(output10, 1.0);
+#ifdef CONVERTTOLINEAR0
+gl_FragColor = toLinearSpace(gl_FragColor);
+#endif
+#ifdef CONVERTTOGAMMA0
+gl_FragColor = toGammaSpace(gl_FragColor);
+#endif
+
+}

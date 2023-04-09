@@ -2,6 +2,7 @@ import * as BABYLON from "@babylonjs/core";
 import * as GUI from "@babylonjs/gui";
 import "@babylonjs/core/Debug/debugLayer";
 import "@babylonjs/inspector";
+import "@babylonjs/node-editor";
 
 export class InitBabylon {
   private textBlock: GUI.TextBlock;
