@@ -1,0 +1,263 @@
+var nodeMaterial = new BABYLON.NodeMaterial("node");
+
+// InputBlock
+var position = new BABYLON.InputBlock("position");
+position.visibleInInspector = false;
+position.visibleOnFrame = false;
+position.target = 1;
+position.setAsAttribute("position");
+
+// TransformBlock
+var WorldPos = new BABYLON.TransformBlock("WorldPos");
+WorldPos.visibleInInspector = false;
+WorldPos.visibleOnFrame = false;
+WorldPos.target = 1;
+WorldPos.complementZ = 0;
+WorldPos.complementW = 1;
+
+// InputBlock
+var World = new BABYLON.InputBlock("World");
+World.visibleInInspector = false;
+World.visibleOnFrame = false;
+World.target = 1;
+World.setAsSystemValue(BABYLON.NodeMaterialSystemValues.World);
+
+// TransformBlock
+var WorldPosViewProjectionTransform = new BABYLON.TransformBlock("WorldPos * ViewProjectionTransform");
+WorldPosViewProjectionTransform.visibleInInspector = false;
+WorldPosViewProjectionTransform.visibleOnFrame = false;
+WorldPosViewProjectionTransform.target = 1;
+WorldPosViewProjectionTransform.complementZ = 0;
+WorldPosViewProjectionTransform.complementW = 1;
+
+// InputBlock
+var ViewProjection = new BABYLON.InputBlock("ViewProjection");
+ViewProjection.visibleInInspector = false;
+ViewProjection.visibleOnFrame = false;
+ViewProjection.target = 1;
+ViewProjection.setAsSystemValue(BABYLON.NodeMaterialSystemValues.ViewProjection);
+
+// VertexOutputBlock
+var VertexOutput = new BABYLON.VertexOutputBlock("VertexOutput");
+VertexOutput.visibleInInspector = false;
+VertexOutput.visibleOnFrame = false;
+VertexOutput.target = 1;
+
+// ScaleBlock
+var Scale = new BABYLON.ScaleBlock("Scale");
+Scale.visibleInInspector = false;
+Scale.visibleOnFrame = false;
+Scale.target = 4;
+
+// InputBlock
+var Float = new BABYLON.InputBlock("Float");
+Float.visibleInInspector = false;
+Float.visibleOnFrame = false;
+Float.target = 1;
+Float.value = 1.5;
+Float.min = 0;
+Float.max = 0;
+Float.isBoolean = false;
+Float.matrixMode = 0;
+Float.animationType = BABYLON.AnimatedInputBlockTypes.None;
+Float.isConstant = false;
+
+// SimplexPerlin3DBlock
+var SimplexPerlinD = new BABYLON.SimplexPerlin3DBlock("SimplexPerlin3D");
+SimplexPerlinD.visibleInInspector = false;
+SimplexPerlinD.visibleOnFrame = false;
+SimplexPerlinD.target = 4;
+
+// MultiplyBlock
+var Multiply = new BABYLON.MultiplyBlock("Multiply");
+Multiply.visibleInInspector = false;
+Multiply.visibleOnFrame = false;
+Multiply.target = 4;
+
+// InputBlock
+var Float1 = new BABYLON.InputBlock("Float");
+Float1.visibleInInspector = false;
+Float1.visibleOnFrame = false;
+Float1.target = 1;
+Float1.value = 2;
+Float1.min = 0;
+Float1.max = 0;
+Float1.isBoolean = false;
+Float1.matrixMode = 0;
+Float1.animationType = BABYLON.AnimatedInputBlockTypes.None;
+Float1.isConstant = false;
+
+// VectorMergerBlock
+var VectorMerger = new BABYLON.VectorMergerBlock("VectorMerger");
+VectorMerger.visibleInInspector = false;
+VectorMerger.visibleOnFrame = false;
+VectorMerger.target = 4;
+VectorMerger.xSwizzle = "x";
+VectorMerger.ySwizzle = "y";
+VectorMerger.zSwizzle = "z";
+VectorMerger.wSwizzle = "w";
+
+// VectorSplitterBlock
+var VectorSplitter = new BABYLON.VectorSplitterBlock("VectorSplitter");
+VectorSplitter.visibleInInspector = false;
+VectorSplitter.visibleOnFrame = false;
+VectorSplitter.target = 4;
+
+// MultiplyBlock
+var Multiply1 = new BABYLON.MultiplyBlock("Multiply");
+Multiply1.visibleInInspector = false;
+Multiply1.visibleOnFrame = false;
+Multiply1.target = 4;
+
+// OneMinusBlock
+var inBounds = new BABYLON.OneMinusBlock("inBounds");
+inBounds.visibleInInspector = false;
+inBounds.visibleOnFrame = false;
+inBounds.target = 4;
+
+// AddBlock
+var Add = new BABYLON.AddBlock("Add");
+Add.visibleInInspector = false;
+Add.visibleOnFrame = false;
+Add.target = 4;
+
+// StepBlock
+var upperBounds = new BABYLON.StepBlock("upperBounds");
+upperBounds.visibleInInspector = false;
+upperBounds.visibleOnFrame = false;
+upperBounds.target = 4;
+
+// InputBlock
+var ceilingValue = new BABYLON.InputBlock("ceilingValue");
+ceilingValue.visibleInInspector = false;
+ceilingValue.visibleOnFrame = false;
+ceilingValue.target = 1;
+ceilingValue.value = 1;
+ceilingValue.min = 0;
+ceilingValue.max = 0;
+ceilingValue.isBoolean = false;
+ceilingValue.matrixMode = 0;
+ceilingValue.animationType = BABYLON.AnimatedInputBlockTypes.None;
+ceilingValue.isConstant = false;
+
+// ScaleBlock
+var Scale1 = new BABYLON.ScaleBlock("Scale");
+Scale1.visibleInInspector = false;
+Scale1.visibleOnFrame = false;
+Scale1.target = 4;
+
+// InputBlock
+var ceilingColor = new BABYLON.InputBlock("ceilingColor");
+ceilingColor.visibleInInspector = false;
+ceilingColor.visibleOnFrame = false;
+ceilingColor.target = 1;
+ceilingColor.value = new BABYLON.Color3(0.30196078431372547, 0.32941176470588235, 0.8705882352941177);
+ceilingColor.isConstant = false;
+
+// AddBlock
+var Add1 = new BABYLON.AddBlock("Add");
+Add1.visibleInInspector = false;
+Add1.visibleOnFrame = false;
+Add1.target = 4;
+
+// ScaleBlock
+var Scale2 = new BABYLON.ScaleBlock("Scale");
+Scale2.visibleInInspector = false;
+Scale2.visibleOnFrame = false;
+Scale2.target = 4;
+
+// InputBlock
+var ceilingColor1 = new BABYLON.InputBlock("ceilingColor");
+ceilingColor1.visibleInInspector = false;
+ceilingColor1.visibleOnFrame = false;
+ceilingColor1.target = 1;
+ceilingColor1.value = new BABYLON.Color3(0.4235294117647059, 0.09411764705882353, 0.06666666666666667);
+ceilingColor1.isConstant = false;
+
+// StepBlock
+var lowerBounds = new BABYLON.StepBlock("lowerBounds");
+lowerBounds.visibleInInspector = false;
+lowerBounds.visibleOnFrame = false;
+lowerBounds.target = 4;
+
+// NegateBlock
+var Negate = new BABYLON.NegateBlock("Negate");
+Negate.visibleInInspector = false;
+Negate.visibleOnFrame = false;
+Negate.target = 4;
+
+// InputBlock
+var floorValue = new BABYLON.InputBlock("floorValue");
+floorValue.visibleInInspector = false;
+floorValue.visibleOnFrame = false;
+floorValue.target = 1;
+floorValue.value = 0;
+floorValue.min = 0;
+floorValue.max = 0;
+floorValue.isBoolean = false;
+floorValue.matrixMode = 0;
+floorValue.animationType = BABYLON.AnimatedInputBlockTypes.None;
+floorValue.isConstant = false;
+
+// AddBlock
+var Add2 = new BABYLON.AddBlock("Add");
+Add2.visibleInInspector = false;
+Add2.visibleOnFrame = false;
+Add2.target = 4;
+
+// GradientBlock
+var Gradient = new BABYLON.GradientBlock("Gradient");
+Gradient.visibleInInspector = false;
+Gradient.visibleOnFrame = false;
+Gradient.target = 4;
+Gradient.colorSteps = [];
+Gradient.colorSteps.push(new BABYLON.GradientBlockColorStep(0, new BABYLON.Color3(0, 0, 0)));
+Gradient.colorSteps.push(new BABYLON.GradientBlockColorStep(1, new BABYLON.Color3(1, 1, 1)));
+
+// FragmentOutputBlock
+var FragmentOutput = new BABYLON.FragmentOutputBlock("FragmentOutput");
+FragmentOutput.visibleInInspector = false;
+FragmentOutput.visibleOnFrame = false;
+FragmentOutput.target = 2;
+FragmentOutput.convertToGammaSpace = undefined;
+FragmentOutput.convertToLinearSpace = undefined;
+FragmentOutput.useLogarithmicDepth = false;
+
+// Connections
+position.output.connectTo(WorldPos.vector);
+World.output.connectTo(WorldPos.transform);
+WorldPos.output.connectTo(WorldPosViewProjectionTransform.vector);
+ViewProjection.output.connectTo(WorldPosViewProjectionTransform.transform);
+WorldPosViewProjectionTransform.output.connectTo(VertexOutput.vector);
+position.output.connectTo(Scale.input);
+Float.output.connectTo(Scale.factor);
+Scale.output.connectTo(SimplexPerlinD.seed);
+SimplexPerlinD.output.connectTo(Multiply.left);
+Float1.output.connectTo(Multiply.right);
+Multiply.output.connectTo(VectorMerger.x);
+VectorMerger.xyz.connectTo(VectorSplitter.xyzIn);
+VectorSplitter.x.connectTo(upperBounds.value);
+ceilingValue.output.connectTo(upperBounds.edge);
+upperBounds.output.connectTo(Add.left);
+VectorSplitter.x.connectTo(Negate.value);
+Negate.output.connectTo(lowerBounds.value);
+floorValue.output.connectTo(lowerBounds.edge);
+lowerBounds.output.connectTo(Add.right);
+Add.output.connectTo(inBounds.input);
+inBounds.output.connectTo(Multiply1.left);
+VectorSplitter.x.connectTo(Multiply1.right);
+Multiply1.output.connectTo(Gradient.gradient);
+Gradient.output.connectTo(Add2.left);
+ceilingColor.output.connectTo(Scale1.input);
+upperBounds.output.connectTo(Scale1.factor);
+Scale1.output.connectTo(Add1.left);
+ceilingColor1.output.connectTo(Scale2.input);
+lowerBounds.output.connectTo(Scale2.factor);
+Scale2.output.connectTo(Add1.right);
+Add1.output.connectTo(Add2.right);
+Add2.output.connectTo(FragmentOutput.rgb);
+
+// Output nodes
+nodeMaterial.addOutputNode(VertexOutput);
+nodeMaterial.addOutputNode(FragmentOutput);
+nodeMaterial.build();

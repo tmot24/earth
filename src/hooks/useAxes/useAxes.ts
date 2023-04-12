@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import * as BABYLON from "@babylonjs/core";
 import { AxesViewer } from "@babylonjs/core";
 import { useContext } from "../../context";
-import { ITemplate } from "../../stories/Template/Template";
+import { ITemplate } from "../../stories/CommonTemplate/Template";
 
 export const useAxes = () => {
   const { context } = useContext<ITemplate>();

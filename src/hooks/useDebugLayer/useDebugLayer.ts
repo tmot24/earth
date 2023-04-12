@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useContext } from "../../context";
-import { ITemplate } from "../../stories/Template/Template";
+import { ITemplate } from "../../stories/CommonTemplate/Template";
 import { DebugLayer, DebugLayerTab } from "@babylonjs/core";
 
 /** Добавление дебага */
