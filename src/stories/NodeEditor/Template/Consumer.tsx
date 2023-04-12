@@ -1,24 +1,62 @@
 import { Canvas } from "../../../components/Canvas/Canvas";
 import { useDebugLayer } from "../../../hooks/useDebugLayer/useDebugLayer";
 import { useInit } from "../../../hooks/useInit/useInit";
-import { useSphere } from "../../../hooks/useSphere/useSphere";
 import { useAxes } from "../../../hooks/useAxes/useAxes";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useContext } from "../../../context";
+import * as BABYLON from "@babylonjs/core";
+import { nodeEditorCode } from "./generated/code.generated";
+import { ITemplate } from "./Template";
+import json from "./generated/nodeMaterial.json";
 
 export const Consumer = () => {
   const {
-    context: { scene },
-  } = useContext<any>();
+    context: { scene, camera, value },
+  } = useContext<ITemplate>();
+  const generateNodeMaterialRef = useRef<BABYLON.NodeMaterial>();
 
   useInit();
   useAxes();
   useDebugLayer();
-  useSphere();
 
-  useEffect(() => {}, [scene]);
+  useEffect(() => {
+    if (scene) {
+      const ground = BABYLON.MeshBuilder.CreateGround(
+        "ground",
+        {
+          width: 10,
+          height: 10,
+          subdivisions: 100,
+        },
+        scene
+      );
 
-  useEffect(() => {}, []);
+      const parseNodeMaterial = BABYLON.NodeMaterial.Parse(json, scene);
+      parseNodeMaterial.build();
+
+      ground.material = parseNodeMaterial;
+      ground.material.backFaceCulling = false;
+
+      // const generateNodeMaterial = nodeEditorCode(scene);
+      // generateNodeMaterialRef.current = generateNodeMaterial;
+      //
+      // ground.material = generateNodeMaterial;
+    }
+  }, [scene]);
+
+  useEffect(() => {
+    if (generateNodeMaterialRef.current) {
+      const generateNodeMaterial = generateNodeMaterialRef.current;
+
+      const getInputBlocks = generateNodeMaterial.getInputBlocks();
+
+      const inputBlock = getInputBlocks.find(({ name }) => name === "value");
+
+      if (inputBlock) {
+        inputBlock.value = value;
+      }
+    }
+  }, [value]);
 
   return <Canvas />;
 };

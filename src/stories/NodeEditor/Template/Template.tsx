@@ -4,6 +4,7 @@ import { Provider } from "../../../context";
 export interface ITemplate {
   isDebug?: boolean;
   isAxes?: boolean;
+  value: number;
 }
 
 export const Template = (props: ITemplate) => {
