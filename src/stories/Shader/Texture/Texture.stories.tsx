@@ -1,8 +1,8 @@
 import React from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { Texture } from "./Texture";
 
-export const TextureStory: ComponentStory<typeof Texture> = (props) => {
+export const TextureStory: StoryFn<typeof Texture> = (props) => {
   return <Texture {...props} />;
 };
 
@@ -16,4 +16,4 @@ export default {
   parameters: {
     layout: "fullscreen",
   },
-} as ComponentMeta<typeof Texture>;
+} as Meta<typeof Texture>;

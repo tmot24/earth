@@ -1,8 +1,8 @@
 import React from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { ClipPlanes } from "./ClipPlanes";
 
-export const ClipPlanesStory: ComponentStory<typeof ClipPlanes> = (props) => {
+export const ClipPlanesStory: StoryFn<typeof ClipPlanes> = (props) => {
   return <ClipPlanes {...props} />;
 };
 
@@ -25,4 +25,4 @@ export default {
   parameters: {
     layout: "fullscreen",
   },
-} as ComponentMeta<typeof ClipPlanes>;
+} as Meta<typeof ClipPlanes>;

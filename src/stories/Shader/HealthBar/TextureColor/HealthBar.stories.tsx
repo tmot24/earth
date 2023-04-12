@@ -1,8 +1,8 @@
 import React from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { HealthBar } from "./HealthBar";
 
-export const HealthBarStory: ComponentStory<typeof HealthBar> = (props) => {
+export const HealthBarStory: StoryFn<typeof HealthBar> = (props) => {
   return <HealthBar {...props} />;
 };
 
@@ -22,4 +22,4 @@ export default {
   parameters: {
     layout: "fullscreen",
   },
-} as ComponentMeta<typeof HealthBar>;
+} as Meta<typeof HealthBar>;

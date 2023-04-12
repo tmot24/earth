@@ -1,10 +1,8 @@
 import React from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { VertexOffset } from "./VertexOffset";
 
-export const VertexOffsetStory: ComponentStory<typeof VertexOffset> = (
-  props
-) => {
+export const VertexOffsetStory: StoryFn<typeof VertexOffset> = (props) => {
   return <VertexOffset {...props} />;
 };
 
@@ -18,4 +16,4 @@ export default {
   parameters: {
     layout: "fullscreen",
   },
-} as ComponentMeta<typeof VertexOffset>;
+} as Meta<typeof VertexOffset>;

@@ -1,8 +1,8 @@
 import React from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { Seismic } from "./Seismic";
 
-export const SeismicStory: ComponentStory<typeof Seismic> = (props) => {
+export const SeismicStory: StoryFn<typeof Seismic> = (props) => {
   return <Seismic {...props} />;
 };
 
@@ -15,4 +15,4 @@ export default {
   parameters: {
     layout: "fullscreen",
   },
-} as ComponentMeta<typeof Seismic>;
+} as Meta<typeof Seismic>;

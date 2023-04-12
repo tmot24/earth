@@ -1,8 +1,8 @@
 import React from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { Wave } from "./Wave";
 
-export const WaveStory: ComponentStory<typeof Wave> = (props) => {
+export const WaveStory: StoryFn<typeof Wave> = (props) => {
   return <Wave {...props} />;
 };
 
@@ -17,4 +17,4 @@ export default {
   parameters: {
     layout: "fullscreen",
   },
-} as ComponentMeta<typeof Wave>;
+} as Meta<typeof Wave>;

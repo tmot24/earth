@@ -1,8 +1,8 @@
 import React from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { UV } from "./UV";
 
-export const UVStory: ComponentStory<typeof UV> = (props) => {
+export const UVStory: StoryFn<typeof UV> = (props) => {
   return <UV {...props} />;
 };
 
@@ -26,4 +26,4 @@ export default {
   parameters: {
     layout: "fullscreen",
   },
-} as ComponentMeta<typeof UV>;
+} as Meta<typeof UV>;

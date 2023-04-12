@@ -7,7 +7,7 @@ export const TemplateStory: StoryFn<typeof Template> = (props) => {
 };
 
 export default {
-  title: "Shader/TemplateStory",
+  title: "NodeEditor/TemplateStory",
   component: Template,
   args: {
     isDebug: false,

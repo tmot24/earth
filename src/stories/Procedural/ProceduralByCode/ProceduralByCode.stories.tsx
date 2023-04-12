@@ -1,8 +1,8 @@
 import React from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { ProceduralByCode } from "./ProceduralByCode";
 
-export const ProceduralByCodeStory: ComponentStory<typeof ProceduralByCode> = (
+export const ProceduralByCodeStory: StoryFn<typeof ProceduralByCode> = (
   props
 ) => {
   return <ProceduralByCode {...props} />;
@@ -18,4 +18,4 @@ export default {
   parameters: {
     layout: "fullscreen",
   },
-} as ComponentMeta<typeof ProceduralByCode>;
+} as Meta<typeof ProceduralByCode>;
