@@ -1,12 +1,12 @@
 import { Consumer } from "./Consumer";
 import { Provider } from "../../../context";
 
-export interface ITemplate {
+export interface ITexture {
   isDebug?: boolean;
   isAxes?: boolean;
 }
 
-export const Template = (props: ITemplate) => {
+export const Texture = (props: ITexture) => {
   return (
     <Provider props={props}>
       <Consumer />

@@ -2,18 +2,16 @@ import { Canvas } from "../../../components/Canvas/Canvas";
 import { useDebugLayer } from "../../../hooks/useDebugLayer/useDebugLayer";
 import { useInit } from "../../../hooks/useInit/useInit";
 import { useAxes } from "../../../hooks/useAxes/useAxes";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useContext } from "../../../context";
 import * as BABYLON from "@babylonjs/core";
-import { nodeEditorCode } from "./generated/code.generated";
 import { IWave } from "./Wave";
 import json from "./generated/nodeMaterial.json";
 
 export const Consumer = () => {
   const {
-    context: { scene, camera, value },
+    context: { scene },
   } = useContext<IWave>();
-  const generateNodeMaterialRef = useRef<BABYLON.NodeMaterial>();
 
   useInit();
   useAxes();
@@ -36,27 +34,8 @@ export const Consumer = () => {
 
       ground.material = parseNodeMaterial;
       ground.material.backFaceCulling = false;
-
-      // const generateNodeMaterial = nodeEditorCode(scene);
-      // generateNodeMaterialRef.current = generateNodeMaterial;
-      //
-      // ground.material = generateNodeMaterial;
     }
   }, [scene]);
-
-  useEffect(() => {
-    if (generateNodeMaterialRef.current) {
-      const generateNodeMaterial = generateNodeMaterialRef.current;
-
-      const getInputBlocks = generateNodeMaterial.getInputBlocks();
-
-      const inputBlock = getInputBlocks.find(({ name }) => name === "value");
-
-      if (inputBlock) {
-        inputBlock.value = value;
-      }
-    }
-  }, [value]);
 
   return <Canvas />;
 };

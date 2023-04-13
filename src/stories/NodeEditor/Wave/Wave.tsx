@@ -4,7 +4,6 @@ import { Provider } from "../../../context";
 export interface IWave {
   isDebug?: boolean;
   isAxes?: boolean;
-  value: number;
 }
 
 export const Wave = (props: IWave) => {

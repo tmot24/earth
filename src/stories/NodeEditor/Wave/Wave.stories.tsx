@@ -12,12 +12,6 @@ export default {
   args: {
     isDebug: false,
     isAxes: false,
-    value: 1,
-  },
-  argTypes: {
-    value: {
-      control: { type: "range", min: 0, max: 10, step: 1 },
-    },
   },
   parameters: {
     layout: "fullscreen",
