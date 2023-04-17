@@ -1,0 +1,164 @@
+// Vertex shader
+precision highp float;
+
+//Attributes
+attribute vec3 position;
+attribute vec2 uv;
+
+
+//Uniforms
+uniform mat4 u_World;
+uniform mat4 u_ViewProjection;
+#ifdef UVTRANSFORM0
+uniform mat4 textureTransform;
+#endif
+#ifdef UVTRANSFORM1
+uniform mat4 textureTransform1;
+#endif
+
+
+//Samplers
+uniform sampler2D DataTextureSampler;
+uniform sampler2D MaskTextureSampler;
+
+
+//Varyings
+#ifdef UVTRANSFORM0
+varying vec2 transformedUV;
+#endif
+#ifdef VMAINUV
+varying vec2 vMainuv;
+#endif
+#ifdef UVTRANSFORM1
+varying vec2 transformedUV1;
+#endif
+
+
+
+
+//Entry point
+void main(void) {
+
+//WorldPos
+vec4 output1 = u_World * vec4(position, 1.0);
+
+//WorldPos * ViewProjectionTransform
+vec4 output0 = u_ViewProjection * output1;
+
+//VertexOutput
+gl_Position = output0;
+
+//DataTexture
+#ifdef UVTRANSFORM0
+transformedUV = vec2(textureTransform * vec4(uv.xy, 1.0, 0.0));
+#elif defined(VMAINUV)
+vMainuv = uv.xy;
+#endif
+
+//MaskTexture
+#ifdef UVTRANSFORM1
+transformedUV1 = vec2(textureTransform1 * vec4(uv.xy, 1.0, 0.0));
+#elif defined(VMAINUV)
+vMainuv = uv.xy;
+#endif
+
+}
+
+// Fragment shader
+precision highp float;
+
+//Uniforms
+uniform mat4 u_World;
+uniform mat4 u_ViewProjection;
+#ifdef UVTRANSFORM0
+uniform mat4 textureTransform;
+#endif
+#ifdef UVTRANSFORM1
+uniform mat4 textureTransform1;
+#endif
+uniform float textureInfoName;
+uniform float textureInfoName1;
+
+
+//Samplers
+uniform sampler2D DataTextureSampler;
+uniform sampler2D MaskTextureSampler;
+
+
+//Varyings
+#ifdef UVTRANSFORM0
+varying vec2 transformedUV;
+#endif
+#ifdef VMAINUV
+varying vec2 vMainuv;
+#endif
+#ifdef UVTRANSFORM1
+varying vec2 transformedUV1;
+#endif
+
+
+//DataTexture
+#include<helperFunctions>
+
+
+
+//Entry point
+void main(void) {
+
+//DataTexture
+#ifdef UVTRANSFORM0
+vec4 tempTextureRead2 = texture2D(DataTextureSampler, transformedUV);
+#elif defined(VMAINUV)
+vec4 tempTextureRead2 = texture2D(DataTextureSampler, vMainuv);
+#endif
+float r = tempTextureRead2.r * textureInfoName;
+#ifdef ISGAMMA2
+                r = toLinearSpace(r);
+                #endif
+            
+//Gradient
+vec3 gradientTempColor = vec3(0.996078431372549, 0.15294117647058825, 0.07058823529411765);
+float gradientTempPosition;
+gradientTempPosition = clamp((r - 0.0) / (0.1 -  0.0), 0.0, 1.0) * step(1.0, 10.0);
+gradientTempColor = mix(gradientTempColor, vec3(0.9882352941176471, 0.3764705882352941, 0.0392156862745098), gradientTempPosition);
+gradientTempPosition = clamp((r - 0.1) / (0.2 -  0.1), 0.0, 1.0) * step(2.0, 10.0);
+gradientTempColor = mix(gradientTempColor, vec3(0.984313725490196, 0.6, 0.00784313725490196), gradientTempPosition);
+gradientTempPosition = clamp((r - 0.2) / (0.3 -  0.2), 0.0, 1.0) * step(3.0, 10.0);
+gradientTempColor = mix(gradientTempColor, vec3(0.9882352941176471, 0.8, 0.10196078431372549), gradientTempPosition);
+gradientTempPosition = clamp((r - 0.3) / (0.4 -  0.3), 0.0, 1.0) * step(4.0, 10.0);
+gradientTempColor = mix(gradientTempColor, vec3(0.996078431372549, 0.996078431372549, 0.2), gradientTempPosition);
+gradientTempPosition = clamp((r - 0.4) / (0.5 -  0.4), 0.0, 1.0) * step(5.0, 10.0);
+gradientTempColor = mix(gradientTempColor, vec3(0.6980392156862745, 0.8431372549019608, 0.19607843137254902), gradientTempPosition);
+gradientTempPosition = clamp((r - 0.5) / (0.6 -  0.5), 0.0, 1.0) * step(6.0, 10.0);
+gradientTempColor = mix(gradientTempColor, vec3(0.4, 0.6901960784313725, 0.19607843137254902), gradientTempPosition);
+gradientTempPosition = clamp((r - 0.6) / (0.7 -  0.6), 0.0, 1.0) * step(7.0, 10.0);
+gradientTempColor = mix(gradientTempColor, vec3(0.20392156862745098, 0.48627450980392156, 0.596078431372549), gradientTempPosition);
+gradientTempPosition = clamp((r - 0.7) / (0.8 -  0.7), 0.0, 1.0) * step(8.0, 10.0);
+gradientTempColor = mix(gradientTempColor, vec3(0.00784313725490196, 0.2784313725490196, 0.996078431372549), gradientTempPosition);
+gradientTempPosition = clamp((r - 0.8) / (0.9 -  0.8), 0.0, 1.0) * step(9.0, 10.0);
+gradientTempColor = mix(gradientTempColor, vec3(0.26666666666666666, 0.1411764705882353, 0.8392156862745098), gradientTempPosition);
+gradientTempPosition = clamp((r - 0.9) / (1.0 -  0.9), 0.0, 1.0) * step(10.0, 10.0);
+gradientTempColor = mix(gradientTempColor, vec3(0.5254901960784314, 0.00392156862745098, 0.6862745098039216), gradientTempPosition);
+vec3 output2 = gradientTempColor;
+
+//MaskTexture
+#ifdef UVTRANSFORM1
+vec4 tempTextureRead3 = texture2D(MaskTextureSampler, transformedUV1);
+#elif defined(VMAINUV)
+vec4 tempTextureRead3 = texture2D(MaskTextureSampler, vMainuv);
+#endif
+float r1 = tempTextureRead3.r * textureInfoName1;
+#ifdef ISGAMMA3
+                r1 = toLinearSpace(r1);
+                #endif
+            
+//FragmentOutput
+gl_FragColor = vec4(output2, r1);
+#ifdef CONVERTTOLINEAR0
+gl_FragColor = toLinearSpace(gl_FragColor);
+#endif
+#ifdef CONVERTTOGAMMA0
+gl_FragColor = toGammaSpace(gl_FragColor);
+#endif
+
+}
