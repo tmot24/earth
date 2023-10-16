@@ -41,6 +41,8 @@ export class CreateMeshes {
 
     const pixels = new Uint8Array(props.data);
 
+    console.log("pixels", pixels);
+
     const texture = new BABYLON.RawTexture(
       pixels,
       props.traces,

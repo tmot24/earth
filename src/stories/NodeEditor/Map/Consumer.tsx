@@ -1,17 +1,18 @@
-import {Canvas} from "../../../components/Canvas/Canvas";
-import {useDebugLayer} from "../../../hooks/useDebugLayer/useDebugLayer";
-import {useInit} from "../../../hooks/useInit/useInit";
-import {useAxes} from "../../../hooks/useAxes/useAxes";
-import {useEffect} from "react";
-import {useContext} from "../../../context";
+import { Canvas } from "../../../components/Canvas/Canvas";
+import { useDebugLayer } from "../../../hooks/useDebugLayer/useDebugLayer";
+import { useInit } from "../../../hooks/useInit/useInit";
+import { useAxes } from "../../../hooks/useAxes/useAxes";
+import { useEffect } from "react";
+import { useContext } from "../../../context";
 import * as BABYLON from "@babylonjs/core";
-import {IMap} from "./Map";
-import {data} from "./data";
-import {nodeEditorCode} from "./generated/code.generated";
+import { IMap } from "./Map";
+import { data } from "./data";
+import { realMap } from "./realMap";
+import { nodeEditorCode } from "./generated/code.generated";
 
 export const Consumer = () => {
   const {
-    context: {scene},
+    context: { scene },
   } = useContext<IMap>();
 
   useInit();
@@ -20,13 +21,15 @@ export const Consumer = () => {
 
   useEffect(() => {
     if (scene) {
+      console.log("realMap", realMap);
+
       const plane = BABYLON.MeshBuilder.CreatePlane(
-          "plane",
-          {
-            width: 10,
-            height: 10,
-          },
-          scene
+        "plane",
+        {
+          width: 10,
+          height: 10,
+        },
+        scene
       );
 
       const uint8Array = data.body.flatMap((value) => scale(value));
@@ -45,29 +48,29 @@ export const Consumer = () => {
       const maskArrayBuffer = new Uint8Array(maskUint8Array);
 
       const dataTexture = BABYLON.RawTexture.CreateLuminanceTexture(
-          arrayBuffer,
-          data.cols,
-          data.rows,
-          scene,
-          false,
-          true,
-          BABYLON.Texture.LINEAR_LINEAR
+        arrayBuffer,
+        data.cols,
+        data.rows,
+        scene,
+        false,
+        true,
+        BABYLON.Texture.LINEAR_LINEAR
       );
 
       const maskTexture = BABYLON.RawTexture.CreateLuminanceTexture(
-          maskArrayBuffer,
-          data.cols,
-          data.rows,
-          scene,
-          false,
-          true,
-          BABYLON.Texture.NEAREST_LINEAR
+        maskArrayBuffer,
+        data.cols,
+        data.rows,
+        scene,
+        false,
+        true,
+        BABYLON.Texture.NEAREST_LINEAR
       );
 
       const generateNodeMaterial = nodeEditorCode(
-          scene,
-          dataTexture,
-          maskTexture
+        scene,
+        dataTexture,
+        maskTexture
       );
 
       plane.material = generateNodeMaterial;
@@ -75,7 +78,7 @@ export const Consumer = () => {
     }
   }, [scene]);
 
-  return <Canvas/>;
+  return <Canvas />;
 };
 
 const scale = (old: number) => {
